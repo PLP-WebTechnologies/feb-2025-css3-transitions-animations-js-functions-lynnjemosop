@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS AND ANIMATED JSS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      transition: background-color 0.5s ease;
+    }
+
+    #animatedBox {
+      width: 100px;
+      height: 100px;
+      background-color: steelblue;
+      margin: 20px auto;
+      transition: transform 0.5s ease;
+    }
+
+    #animatedBox.move {
+      transform: translateY(100px) scale(1.2) rotate(15deg);
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background-color: #6200ee;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3700b3;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Animated Box & Theme Saver</h1>
+  <div id="animatedBox"></div>
+
+  <button onclick="animateBox()">Animate</button>
+  <button onclick="toggleTheme()">Toggle Theme</button>
+
+  <script>
+    // Animate the box on click
+    function animateBox() {
+      const box = document.getElementById('animatedBox');
+      box.classList.toggle('move');
+    }
+
+    // Toggle light/dark theme and store preference
+    function toggleTheme() {
+      const currentColor = document.body.style.backgroundColor;
+      const newColor = currentColor === 'lightgray' ? 'white' : 'lightgray';
+      document.body.style.backgroundColor = newColor;
+
+      // Save to localStorage
+      localStorage.setItem('bgColor', newColor);
+    }
+
+    // Load saved preference on page load
+    window.onload = function() {
+      const savedColor = localStorage.getItem('bgColor');
+      if (savedColor) {
+        document.body.style.backgroundColor = savedColor;
+      }
+    };
+  </script>
+</body>
+</html>
